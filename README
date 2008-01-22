@@ -1,0 +1,20 @@
+Coxpcall
+http://coxpcall.luaforge.net/
+
+Coxpcall encapsulates the protected calls with a coroutine based loop,
+so errors can be dealed without the usual pcall/xpcall issues with coroutines.
+
+Using Coxpcall usually consists in simply loading the module and then replacing
+Lua pcall and xpcall by copcall and coxpcall.
+
+Coxpcall is free software and uses the same license as Lua 5.1.
+
+Current version is 1.11. It was developed for Lua 5.1.
+
+Coxpcall can be downloaded from its LuaForge page. You can also get Coxpcall using LuaRocks:
+luarocks install coxpcall
+
+History
+Coxpcall 1.11 [22/Jan/2008]
+        * Moving Coxpcall to a standalone project since its now being used by more than only Xavante
+        * Refactoring and bug fixes by Thomas Harning Jr., Ignacio Burgueño and Fábio Mascarenhas
