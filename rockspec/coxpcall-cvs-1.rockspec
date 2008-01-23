@@ -22,7 +22,7 @@ source = {
 
 build = {
    type = "make",
-   build_pass = true,
+   build_pass = false,
    install_target = "install-rocks",
    install_variables = {
      PREFIX  = "$(PREFIX)",
