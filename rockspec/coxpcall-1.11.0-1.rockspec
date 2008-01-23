@@ -1,6 +1,6 @@
 package = "Coxpcall"
 
-version = "cvs-1"
+version = "1.11.0"
 
 description = {
   summary = "Coroutine safe xpcall and pcall",
