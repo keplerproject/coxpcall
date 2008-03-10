@@ -10,7 +10,7 @@
 --
 -- Copyright 2005 - Kepler Project (www.keplerproject.org)
 --
--- $Id: coxpcall.lua,v 1.11 2008/01/22 21:43:44 carregal Exp $
+-- $Id: coxpcall.lua,v 1.12 2008/03/10 16:05:56 mascarenhas Exp $
 -------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------
@@ -21,7 +21,7 @@ local oldpcall, oldxpcall = pcall, xpcall
 
 function handleReturnValue(err, co, status, ...)
     if not status then
-        return false, err(...)
+        return false, err(debug.traceback(co, (...)), ...)
     end
     if coroutine.status(co) == 'suspended' then
         return performResume(err, co, coroutine.yield(...))
