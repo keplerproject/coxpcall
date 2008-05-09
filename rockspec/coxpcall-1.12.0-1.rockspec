@@ -3,7 +3,7 @@ package = "Coxpcall"
 version = "1.12.0-1"
 
 source = {
-  url = "",
+  url = "http://luaforge.net/frs/download.php/3351/coxpcall-1.12.0.tar.gz",
 }
 
 description = {
