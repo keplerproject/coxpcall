@@ -10,7 +10,7 @@
 --
 -- Copyright 2005 - Kepler Project (www.keplerproject.org)
 --
--- $Id: coxpcall.lua,v 1.12 2008/03/10 16:05:56 mascarenhas Exp $
+-- $Id: coxpcall.lua,v 1.13 2008/05/19 19:20:02 mascarenhas Exp $
 -------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ end
 -- Implements pcall with coroutines
 -------------------------------------------------------------------------------
 
-local function id(...)
+local function id(trace, ...)
   return ...
 end
 
