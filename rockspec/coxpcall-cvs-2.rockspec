@@ -16,8 +16,7 @@ description = {
 dependencies = { }
 
 source = {
-  url = "cvs://:pserver:anonymous:@cvs.luaforge.net:/cvsroot/coxpcall",
-  cvs_tag = "HEAD"
+  url = "git://github.com/keplerproject/coxpcall.git"
 }
 
 build = {
