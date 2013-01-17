@@ -13,5 +13,9 @@ Coxpcall can be downloaded from its LuaForge page. You can also get Coxpcall usi
 luarocks install coxpcall
 
 History
+
+Coxpcall 1.14 [30/Jan/2013]
+        * Lua 5.2 support
+
 Coxpcall 1.13 [19/May/2008]
         * Fixed bug [#5275], found by Gary NG
