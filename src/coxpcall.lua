@@ -6,7 +6,7 @@
 -- yielding inside the call to pcall or xpcall.
 --
 -- Authors: Roberto Ierusalimschy and Andre Carregal
--- Contributors: Thomas Harning Jr., Ignacio Burgueño, Fábio Mascarenhas
+-- Contributors: Thomas Harning Jr., Ignacio BurgueÃ±o, Fabio Mascarenhas
 --
 -- Copyright 2005 - Kepler Project (www.keplerproject.org)
 --
@@ -25,7 +25,9 @@ end
 -------------------------------------------------------------------------------
 local performResume, handleReturnValue
 local oldpcall, oldxpcall = pcall, xpcall
-
+local pack = table.pack or function(...) return {n = select("#", ...), ...} end
+local unpack = table.unpack or unpack
+  
 function handleReturnValue(err, co, status, ...)
     if not status then
         return false, err(debug.traceback(co, (...)), ...)
@@ -44,8 +46,8 @@ end
 function coxpcall(f, err, ...)
     local res, co = oldpcall(coroutine.create, f)
     if not res then
-        local params = {...}
-        local newf = function() return f(unpack(params)) end
+        local params = pack(...)
+        local newf = function() return f(unpack(params, 1, params.n)) end
         co = coroutine.create(newf)
     end
     return performResume(err, co, ...)
