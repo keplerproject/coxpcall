@@ -36,9 +36,10 @@
 			<li><a href="index.html#contact">Contact us</a></li>
 		</ul>
 		</li>
-		<li><a href="http://github.com/keplerproject/coxpcall/">Project</a>
+		<li><a href="http://keplerproject.github.io/coxpcall/">Project</a>
 		<ul>
-			<li><a href="http://github.com/keplerproject/coxpcall/issues">Bug Tracker</a></li>
+			<li><a href="https://github.com/keplerproject/coxpcall/issues">Bug Tracker</a></li>
+			<li><a href="https://github.com/keplerproject/coxpcall">Source code</a></li>
 		</ul>
 		</li>
 		<li><a href="license.html">License</a></li>
@@ -63,13 +64,16 @@ replacing Lua <code>pcall</code> and <code>xpcall</code> by <code>copcall</code>
 
 <h2><a name="status"></a>Status</h2>
 
-<p>Current version is 1.14. It supports Lua 5.1 and Lua 5.2.</p>
+<p>Current version is 1.14. It supports Lua 5.1 and Lua 5.2. Lua 5.2 was extended with the Coxpcall 
+functionality and hence coxpcall is no longer required. The
+5.2 compatibility by coxpcall means that it maintains backward compatibility while using the build
+in 5.2 implementation.</p>
 
 <h2><a name="download"></a>Download</h2>
 
 <p>
 Coxpcall can be downloaded from its
-<a href="http://github.com/keplerproject/coxpcall">Github</a> page.
+<a href="https://github.com/keplerproject/coxpcall/releases">GitHub</a> page.
 You can also get Coxpcall using <a href="http://luarocks.org">LuaRocks</a>:
 </p>
 
@@ -83,6 +87,7 @@ luarocks install coxpcall
 	<dt><strong>Coxpcall 1.14</strong> [30/Jan/2013]</dt>
 	<dd><ul>
 		<li>Support for Lua 5.2</li>
+		<li>Fixed bug, <a href="https://github.com/keplerproject/coxpcall/pull/1">handling nil parameters</a>, found by Thijs Schreijer</li>
 	</ul></dd>
 
         <dt><strong>Coxpcall 1.13</strong> [19/May/2008]</dt>
