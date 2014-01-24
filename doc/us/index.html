@@ -56,7 +56,8 @@ issues with coroutines.
 </p>
 
 <p>Using Coxpcall usually consists in simply loading the module and then
-replacing Lua <code>pcall</code> and <code>xpcall</code> by <code>copcall</code> and <code>coxpcall</code>.</p>
+replacing Lua <code>pcall</code>, <code>xpcall</code> and <code>coroutine.running</code> 
+by <code>copcall</code>, <code>coxpcall</code>, and <code>running</code>.</p>
 
 <p>Coxpcall is free software and uses the same
 <a href="license.html">license</a> as Lua 5.1 and 5.2.
@@ -84,6 +85,11 @@ luarocks install coxpcall
 <h2><a name="history"></a>History</h2>
 
 <dl>
+	<dt><strong>Coxpcall 1.15</strong> [xx/xxx/xxxx]</dt>
+	<dd><ul>
+		<li>Added <code>running</code> function as <code>coroutine.running</code> replacement</li>
+	</ul></dd>
+
 	<dt><strong>Coxpcall 1.14</strong> [30/Jan/2013]</dt>
 	<dd><ul>
 		<li>Support for Lua 5.2</li>
@@ -112,8 +118,8 @@ luarocks install coxpcall
 
 <h2><a name="reference"></a>Reference</h2>
 
-<p>Coxpcall offers two functions that reproduce the behaviour of
-<code>pcall</code> and <code>xpcall</code>:</p>
+<p>Coxpcall offers three functions that reproduce the behaviour of
+<code>pcall</code>, <code>xpcall</code>, and  <code>coroutine.running</code>:</p>
 
 <dl>
 	<dt><strong><code>coxpcall(f, err)</code></strong></dt>
@@ -121,6 +127,10 @@ luarocks install coxpcall
 	
 	<dt><strong><code>copcall(f, ...)</code></strong></dt>
 	<dd>Offers the same functionality as Lua <code>pcall(f, ...)</code>.</dd>
+
+	<dt><strong><code>running()</code></strong></dt>
+	<dd>Offers the same functionality as Lua <code>coroutine.running()</code>, but takes into 
+        account the extra coroutine created by <code>copcall</code> and <code>coxpcall</code>.</dd>
 </dl>
 
 <h2><a name="credits"></a>Credits</h2>

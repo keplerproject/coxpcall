@@ -52,7 +52,7 @@ function coxpcall(f, err, ...)
         local newf = function() return f(unpack(params, 1, params.n)) end
         co = coroutine.create(newf)
     end
-    coromap[co] = running()
+    coromap[co] = (running() or "mainthread")
     return performResume(err, co, ...)
 end
 
@@ -62,6 +62,7 @@ local function corunning()
   while coromap[coro] do
     coro = coromap[coro]
   end
+  if coro == "mainthread" then return nil end
   return coro
 end
 
