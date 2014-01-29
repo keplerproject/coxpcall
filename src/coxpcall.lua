@@ -17,16 +17,18 @@
 if _VERSION == "Lua 5.2" then
   copcall = pcall
   coxpcall = xpcall
-  return { pcall = pcall, xpcall = xpcall }
+  return { pcall = pcall, xpcall = xpcall, running = coroutine.running }
 end
 
 -------------------------------------------------------------------------------
 -- Implements xpcall with coroutines
 -------------------------------------------------------------------------------
 local performResume, handleReturnValue
-local oldpcall, oldxpcall = pcall, xpcall
+local oldpcall = pcall
 local pack = table.pack or function(...) return {n = select("#", ...), ...} end
 local unpack = table.unpack or unpack
+local running = coroutine.running
+local coromap = setmetatable({}, { __mode = "k" })
   
 function handleReturnValue(err, co, status, ...)
     if not status then
@@ -50,7 +52,18 @@ function coxpcall(f, err, ...)
         local newf = function() return f(unpack(params, 1, params.n)) end
         co = coroutine.create(newf)
     end
+    coromap[co] = (running() or "mainthread")
     return performResume(err, co, ...)
+end
+
+local function corunning()
+  local ok, coro = pcall(running)
+  if not ok then error(coro, 2) end
+  while coromap[coro] do
+    coro = coromap[coro]
+  end
+  if coro == "mainthread" then return nil end
+  return coro
 end
 
 -------------------------------------------------------------------------------
@@ -65,4 +78,4 @@ function copcall(f, ...)
     return coxpcall(f, id, ...)
 end
 
-return { pcall = copcall, xpcall = coxpcall }
+return { pcall = copcall, xpcall = coxpcall, running = corunning }

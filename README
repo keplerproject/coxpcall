@@ -19,6 +19,9 @@ in 5.2 implementation.
 
 History
 
+Coxpcall 1.15 [xx/xxx/xxxx]
+        * Added 'running' function as coroutine.running replacement
+
 Coxpcall 1.14 [30/Jan/2013]
         * Lua 5.2 support
         * Fixed bug, handling nil parameters. Found by Thijs Schreijer
