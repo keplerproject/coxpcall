@@ -56,9 +56,12 @@ function coxpcall(f, err, ...)
     return performResume(err, co, ...)
 end
 
-local function corunning()
-  local ok, coro = pcall(running)
-  if not ok then error(coro, 2) end
+local function corunning(coro)
+  if coro ~= nil then
+    assert(type(coro)=="thread", "Bad argument; expected thread, got: "..type(coro))
+  else
+    coro = running()
+  end
   while coromap[coro] do
     coro = coromap[coro]
   end
