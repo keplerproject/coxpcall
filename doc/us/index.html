@@ -128,9 +128,13 @@ luarocks install coxpcall
 	<dt><strong><code>copcall(f, ...)</code></strong></dt>
 	<dd>Offers the same functionality as Lua <code>pcall(f, ...)</code>.</dd>
 
-	<dt><strong><code>running()</code></strong></dt>
-	<dd>Offers the same functionality as Lua <code>coroutine.running()</code>, but takes into 
-        account the extra coroutine created by <code>copcall</code> and <code>coxpcall</code>.</dd>
+	<dt><strong><code>running([coro])</code></strong></dt>
+        <dd>Because <code>coxpcall</code> and <code>copcall</code> run the function to protect 
+        inside a new coroutine, <code>coroutine.running()</code> will return an unexpected
+        coroutine when used inside the protected function. If the coroutine <code>coro</code> was 
+        created by the coxpcall module, then <code>running(coro)</code> will return the original 
+        coroutine that created it. If <code>coro</code> is not provided, it will default to the
+        currently running coroutine.</dd>
 </dl>
 
 <h2><a name="credits"></a>Credits</h2>
