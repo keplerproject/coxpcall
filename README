@@ -19,7 +19,7 @@ in 5.2 implementation.
 
 History
 
-Coxpcall 1.15 [xx/xxx/xxxx]
+Coxpcall 1.15 [10/Feb/2014]
         * Added 'running' function as coroutine.running replacement
 
 Coxpcall 1.14 [30/Jan/2013]
