@@ -14,7 +14,7 @@
 -------------------------------------------------------------------------------
 
 -- Lua 5.2 makes this module a no-op
-if _VERSION == "Lua 5.2" then
+if _VERSION ~= "Lua 5.1" then
   copcall = pcall
   coxpcall = xpcall
   return { pcall = pcall, xpcall = xpcall, running = coroutine.running }
