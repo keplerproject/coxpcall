@@ -127,7 +127,10 @@ local coxpcall = require "coxpcall"
 
 <dl>
 	<dt><strong><code>coxpcall.xpcall(f, err)</code></strong></dt>
-	<dd>Offers the same functionality as Lua <code>xpcall(f, err)</code>.
+	<dd>Offers the same functionality as Lua <code>xpcall(f, err)</code>,
+	but calls the error handler <em>after</em> the error unwinds the stack,
+	so that it's impossible to gather more information about the error.
+	To compensate, if the error is a string, stack trace is appended to it.
 	Also set as global <code>coxpcall</code>.</dd>
 	
 	<dt><strong><code>coxpcall.pcall(f, ...)</code></strong></dt>
