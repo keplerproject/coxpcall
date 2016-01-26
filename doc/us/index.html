@@ -118,17 +118,23 @@ luarocks install coxpcall
 
 <h2><a name="reference"></a>Reference</h2>
 
-<p>Coxpcall offers three functions that reproduce the behaviour of
+<p>Coxpcall module offers three functions that reproduce the behaviour of
 <code>pcall</code>, <code>xpcall</code>, and  <code>coroutine.running</code>:</p>
 
-<dl>
-	<dt><strong><code>coxpcall(f, err)</code></strong></dt>
-	<dd>Offers the same functionality as Lua <code>xpcall(f, err)</code>.</dd>
-	
-	<dt><strong><code>copcall(f, ...)</code></strong></dt>
-	<dd>Offers the same functionality as Lua <code>pcall(f, ...)</code>.</dd>
+<pre class="example">
+local coxpcall = require "coxpcall"
+</pre>
 
-	<dt><strong><code>running([coro])</code></strong></dt>
+<dl>
+	<dt><strong><code>coxpcall.xpcall(f, err)</code></strong></dt>
+	<dd>Offers the same functionality as Lua <code>xpcall(f, err)</code>.
+	Also set as global <code>coxpcall</code>.</dd>
+	
+	<dt><strong><code>coxpcall.pcall(f, ...)</code></strong></dt>
+	<dd>Offers the same functionality as Lua <code>pcall(f, ...)</code>.
+	Also set as global <code>copcall</code>.</dd>
+
+	<dt><strong><code>coxpcall.running([coro])</code></strong></dt>
         <dd>Because <code>coxpcall</code> and <code>copcall</code> run the function to protect 
         inside a new coroutine, <code>coroutine.running()</code> will return an unexpected
         coroutine when used inside the protected function. If the coroutine <code>coro</code> was 
