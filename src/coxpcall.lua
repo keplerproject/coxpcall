@@ -8,7 +8,7 @@
 -- Authors: Roberto Ierusalimschy and Andre Carregal
 -- Contributors: Thomas Harning Jr., Ignacio Burgueño, Fabio Mascarenhas
 --
--- Copyright 2005 - Kepler Project (www.keplerproject.org)
+-- Copyright 2005 - Kepler Project
 --
 -- $Id: coxpcall.lua,v 1.13 2008/05/19 19:20:02 mascarenhas Exp $
 -------------------------------------------------------------------------------
