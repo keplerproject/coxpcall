@@ -4,7 +4,7 @@
 
 <head>
 	<title>Coxpcall -  Coroutine Safe xpcall and pcall</title>
-	<link rel="stylesheet" href="http://www.keplerproject.org/doc.css" type="text/css"/>
+	<link rel="stylesheet" href="doc.css" type="text/css"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
@@ -13,7 +13,7 @@
 <div id="container">
 
 <div id="product">
-	<div id="product_logo"><a href="http://www.keplerproject.org">
+	<div id="product_logo"><a href="http://keplerproject.github.io/coxpcall/">
 		<img alt="coxpcall logo" src="coxpcall.png" width="128" height="128"/></a>
 	</div>
 	<div id="product_name"><big><strong>Coxpcall</strong></big></div>
@@ -118,17 +118,26 @@ luarocks install coxpcall
 
 <h2><a name="reference"></a>Reference</h2>
 
-<p>Coxpcall offers three functions that reproduce the behaviour of
+<p>Coxpcall module offers three functions that reproduce the behaviour of
 <code>pcall</code>, <code>xpcall</code>, and  <code>coroutine.running</code>:</p>
 
-<dl>
-	<dt><strong><code>coxpcall(f, err)</code></strong></dt>
-	<dd>Offers the same functionality as Lua <code>xpcall(f, err)</code>.</dd>
-	
-	<dt><strong><code>copcall(f, ...)</code></strong></dt>
-	<dd>Offers the same functionality as Lua <code>pcall(f, ...)</code>.</dd>
+<pre class="example">
+local coxpcall = require "coxpcall"
+</pre>
 
-	<dt><strong><code>running([coro])</code></strong></dt>
+<dl>
+	<dt><strong><code>coxpcall.xpcall(f, err)</code></strong></dt>
+	<dd>Offers the same functionality as Lua <code>xpcall(f, err)</code>,
+	but calls the error handler <em>after</em> the error unwinds the stack,
+	so that it's impossible to gather more information about the error.
+	To compensate, if the error is a string, stack trace is appended to it.
+	Also set as global <code>coxpcall</code>.</dd>
+	
+	<dt><strong><code>coxpcall.pcall(f, ...)</code></strong></dt>
+	<dd>Offers the same functionality as Lua <code>pcall(f, ...)</code>.
+	Also set as global <code>copcall</code>.</dd>
+
+	<dt><strong><code>coxpcall.running([coro])</code></strong></dt>
         <dd>Because <code>coxpcall</code> and <code>copcall</code> run the function to protect 
         inside a new coroutine, <code>coroutine.running()</code> will return an unexpected
         coroutine when used inside the protected function. If the coroutine <code>coro</code> was 
@@ -143,7 +152,7 @@ luarocks install coxpcall
 Coxpcall was designed and implemented by Roberto Ierusalimschy and
 Andr&eacute; Carregal with the colaboration of Thomas Harning Jr., Ignacio Burgue&ntilde;o,
 Gary NG and F&aacute;bio Mascarenhas as part of the
-<a href="http://www.keplerproject.org">Kepler Project</a> which holds its copyright.
+<a href="https://github.com/keplerproject">Kepler Project</a> which holds its copyright.
 </p>
 
 <h2><a name="contact"></a>Contact us</h2>
