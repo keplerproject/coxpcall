@@ -20,6 +20,6 @@ source = {
 }
 
 build = {
-   type = "bultin",
+   type = "builtin",
    modules = { coxpcall = "src/coxpcall.lua" }
 }

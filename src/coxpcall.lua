@@ -36,12 +36,12 @@ end
 -- Implements xpcall with coroutines
 -------------------------------------------------------------------------------
 local performResume, handleReturnValue
-local oldpcall = pcall
+local oldpcall, oldxpcall = pcall, xpcall
 local pack = table.pack or function(...) return {n = select("#", ...), ...} end
 local unpack = table.unpack or unpack
 local running = coroutine.running
 local coromap = setmetatable({}, { __mode = "k" })
-  
+
 function handleReturnValue(err, co, status, ...)
     if not status then
         return false, err(debug.traceback(co, (...)), ...)
@@ -57,15 +57,31 @@ function performResume(err, co, ...)
     return handleReturnValue(err, co, coroutine.resume(co, ...))
 end
 
+local function id(trace, ...)
+    return trace
+end
+
 function coxpcall(f, err, ...)
-    local res, co = oldpcall(coroutine.create, f)
-    if not res then
-        local params = pack(...)
-        local newf = function() return f(unpack(params, 1, params.n)) end
-        co = coroutine.create(newf)
+    local current = running()
+    if not current then
+        if err == id then
+            return oldpcall(f, ...)
+        else
+            if select("#", ...) > 0 then
+                local oldf, params = f, pack(...)
+                f = function() return oldf(unpack(params, 1, params.n)) end
+            end
+            return oldxpcall(f, err)
+        end
+    else
+        local res, co = oldpcall(coroutine.create, f)
+        if not res then
+            local newf = function(...) return f(...) end
+            co = coroutine.create(newf)
+        end
+        coromap[co] = current
+        return performResume(err, co, ...)
     end
-    coromap[co] = (running() or "mainthread")
-    return performResume(err, co, ...)
 end
 
 local function corunning(coro)
@@ -84,10 +100,6 @@ end
 -------------------------------------------------------------------------------
 -- Implements pcall with coroutines
 -------------------------------------------------------------------------------
-
-local function id(trace, ...)
-  return ...
-end
 
 function copcall(f, ...)
     return coxpcall(f, id, ...)
