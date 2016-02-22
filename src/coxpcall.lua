@@ -76,8 +76,7 @@ function coxpcall(f, err, ...)
     else
         local res, co = oldpcall(coroutine.create, f)
         if not res then
-            local params = pack(...)
-            local newf = function() return f(unpack(params, 1, params.n)) end
+            local newf = function(...) return f(...) end
             co = coroutine.create(newf)
         end
         coromap[co] = current
